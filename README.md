@@ -2,39 +2,54 @@
 - Unity 6000
 
 # Features
- - Singleton
- - Custom interpolation
- - Coroutine Wrapper
- - Custom scene transitions
- - Scene sequencer
- - 2D platformer
- - Dialogue system
- - Inventory system
- - Mini map
- - Sound manager
- - UI Advanced Toolkit (UI animations, effects, radio buttons)
- - Settings controller
- - Save system
- - Various menus (main, settings, credits)
- - Health system
- - Pickup system
- - Key-door setup
- - Easy buttons
- - Gamedata manager
-
+- Singleton
+- Quick Scene Swap (Editor)
+- Custom scene transitions
+- Custom interpolation
+- Coroutine Wrapper
+- Easy buttons
  
- # Platformer
+## To do next
 
+# General
+- Transform / Rect transform animation with coroutine animations
+- Shader pack for 2d (shine, water, ...)
+- Post processing effects
+- Post processing wrapper with easy runtime customization
+- Dual controller setup
+- Scene sequencer
+- Sound manager
+- Gamedata manager
+
+
+# Platformer
 - Player movement script
 - Basic AI enemy controller
 - Platform logic (movement, pass through, break on stand...)
 - Camera movement
 
-# TODO
+# UI
+- Cursor Pack
+- UI inverted mask shader
+- Text: Always visible border effect
+- UI Advanced Toolkit (UI animations, effects, radio buttons)
+- Settings
+- Various menus (main, settings, credits)
 
-- Top-Down controller
-- Shaders for 2D
-- Post processing effects
-- Post processing runtime editor
-- Procedural rouglike dungeon generator
-- Dual controller setup
+
+# TOP DOWN Controller
+- Player movement script
+- Basic AI enemy controller
+- Camera movement
+- Z index automation
+- Player see through shader (make it visible when hiding)
+
+# Gameplay systems
+- Procedural rougue-like dungeon generator
+- Dialogue system
+- Inventory system
+- Mini map
+- Health system
+- Pickup system
+- Key-door setup
+- Save system

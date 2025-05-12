@@ -9,9 +9,9 @@
 - Coroutine Wrapper
 - Easy buttons
  
-## To do next
+# To do next
 
-# General
+## General
 - Transform / Rect transform animation with coroutine animations
 - Shader pack for 2d (shine, water, ...)
 - Post processing effects
@@ -22,13 +22,13 @@
 - Gamedata manager
 
 
-# Platformer
+## Platformer
 - Player movement script
 - Basic AI enemy controller
 - Platform logic (movement, pass through, break on stand...)
 - Camera movement
 
-# UI
+## UI
 - Cursor Pack
 - UI inverted mask shader
 - Text: Always visible border effect
@@ -37,14 +37,14 @@
 - Various menus (main, settings, credits)
 
 
-# TOP DOWN Controller
+## TOP DOWN Controller
 - Player movement script
 - Basic AI enemy controller
 - Camera movement
 - Z index automation
 - Player see through shader (make it visible when hiding)
 
-# Gameplay systems
+## Gameplay systems
 - Procedural rougue-like dungeon generator
 - Dialogue system
 - Inventory system

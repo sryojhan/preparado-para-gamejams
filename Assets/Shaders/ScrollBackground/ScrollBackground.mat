@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_TransitionMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 3410d0822cf83374eac6a91e3f001950, type: 3}
+  m_Name: ScrollBackground
+  m_Shader: {fileID: -6465566751694194690, guid: bacdb870d2d6a4e4c810f1757fcea0e5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,20 +23,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Background:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TransitionGradient:
-        m_Texture: {fileID: 2800000, guid: ac4bc60fd5af4974dafde445f93d519f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _transitionGradient:
-        m_Texture: {fileID: 2800000, guid: ac4bc60fd5af4974dafde445f93d519f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,6 +42,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
+    - _Horizontal_speed: 0.096
+    - _Scale: 16
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -61,13 +51,8 @@ Material:
     - _StencilWriteMask: 255
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
-    - _inProgress: 1
-    - _invert: 0
-    - _inverted: 0
-    - _time: 0
+    - _Vertical_speed: 0.04
     m_Colors:
-    - _BackgroundColor: {r: 1, g: 1, b: 1, a: 0}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

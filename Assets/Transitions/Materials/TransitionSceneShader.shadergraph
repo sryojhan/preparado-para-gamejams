@@ -937,8 +937,8 @@
     "m_ObjectId": "43fc98b0c65e4ffa9845164d0b0fdbea",
     "m_Title": "Remap Mask value ",
     "m_Position": {
-        "x": 1002.0000610351563,
-        "y": -1146.9998779296875
+        "x": 1002.0,
+        "y": -1147.0
     }
 }
 
@@ -1402,7 +1402,7 @@
     "m_Title": "Mask progress Input",
     "m_Position": {
         "x": 1443.0,
-        "y": -607.9998779296875
+        "y": -608.0
     }
 }
 
@@ -1537,8 +1537,8 @@
     "m_ObjectId": "6fd8fb733eab48e7aa5e7417c727b9ac",
     "m_Title": "Transition background color",
     "m_Position": {
-        "x": 1350.9998779296875,
-        "y": -1738.9998779296875
+        "x": 1351.0,
+        "y": -1739.0
     }
 }
 

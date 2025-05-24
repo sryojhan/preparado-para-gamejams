@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_TransitionMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 3410d0822cf83374eac6a91e3f001950, type: 3}
+  m_Name: UI_InvertedMask
+  m_Shader: {fileID: -6465566751694194690, guid: 5c652ddded3e3f1408072bdda577dd03, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -18,25 +18,26 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Background:
+    - Layer_10DDE6E0:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Layer_6DA0192F:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cutoff:
+        m_Texture: {fileID: 8400000, guid: 2f4c3c03d3263114d8f55cbf730de507, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TransitionGradient:
-        m_Texture: {fileID: 2800000, guid: ac4bc60fd5af4974dafde445f93d519f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _transitionGradient:
-        m_Texture: {fileID: 2800000, guid: ac4bc60fd5af4974dafde445f93d519f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,6 +55,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -61,13 +64,7 @@ Material:
     - _StencilWriteMask: 255
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
-    - _inProgress: 1
-    - _invert: 0
-    - _inverted: 0
-    - _time: 0
     m_Colors:
-    - _BackgroundColor: {r: 1, g: 1, b: 1, a: 0}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

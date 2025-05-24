@@ -8,29 +8,31 @@
 - Custom interpolation
 - Coroutine Wrapper
 - Easy buttons
+- UI inverted mask shader
  
 # To do next
+- Player movement script
+- Transform / Rect transform animation with coroutine animations
+- Scene sequencer
+
+
 
 ## General
-- Transform / Rect transform animation with coroutine animations
 - Shader pack for 2d (shine, water, ...)
 - Post processing effects
 - Post processing wrapper with easy runtime customization
 - Dual controller setup
-- Scene sequencer
 - Sound manager
 - Gamedata manager
 
 
 ## Platformer
-- Player movement script
 - Basic AI enemy controller
 - Platform logic (movement, pass through, break on stand...)
 - Camera movement
 
 ## UI
 - Cursor Pack
-- UI inverted mask shader
 - Text: Always visible border effect
 - UI Advanced Toolkit (UI animations, effects, radio buttons)
 - Settings

@@ -16,8 +16,10 @@ namespace QuickStart.Platformer
         private QSPlatformerStateMachine stateMachine;
 
         /* Components references*/
-        public Rigidbody2D RigidBody { get; private set; }
-        public BoxCollider2D BoxCollider { get; private set; }
+        public Rigidbody2D RigidBodyComponent { get; private set; }
+        public BoxCollider2D BoxColliderComponent { get; private set; }
+        public SpriteRenderer SpriteRendererComponent { get; private set; }
+        public Animator AnimatorComponent { get; private set; }
 
         /* Platformer references */
         public QSPlatformerMovementHandler MovementHandler { get; private set; }
@@ -38,8 +40,9 @@ namespace QuickStart.Platformer
         private void Update()
         {
             UpdatePlayerInput();
+            
+            //TODO: ManageSlideLogic();
 
-            ManageSlideLogic();
             UpdateCurrentCharacterState();
             UpdateAnimation();
         }
@@ -49,7 +52,6 @@ namespace QuickStart.Platformer
             CheckGrounded();
 
             ApplyStickMovement();
-
 
             TryJump();
             AdjustJumpHeight();
@@ -64,8 +66,11 @@ namespace QuickStart.Platformer
 
         private void FetchComponentReferences()
         {
-            BoxCollider = GetComponentInChildren<BoxCollider2D>();
-            RigidBody = GetComponentInChildren<Rigidbody2D>();
+            BoxColliderComponent = GetComponentInChildren<BoxCollider2D>();
+            RigidBodyComponent = GetComponentInChildren<Rigidbody2D>();
+            SpriteRendererComponent = GetComponentInChildren<SpriteRenderer>();
+            AnimatorComponent = GetComponentInChildren<Animator>();
+
 
             MovementHandler = GetComponentInChildren<QSPlatformerMovementHandler>();
             JumpHandler = GetComponentInChildren<QSPlatformerJumpHandler>();
@@ -90,35 +95,56 @@ namespace QuickStart.Platformer
         }
 
 
-
         private void ManageSlideLogic()
         {
-
+            //TODO: slide
         }
 
         private void UpdateCurrentCharacterState()
         {
+            float horizontalSpeedMagnitude = Mathf.Abs(RigidBodyComponent.linearVelocityX);
 
+            if(GroundedChecker.IsGrounded && stateMachine.state != QSPlatformerStateMachine.State.Jump)
+            {
+
+                if(horizontalSpeedMagnitude > 0.05)
+                {
+                    stateMachine.state = QSPlatformerStateMachine.State.Running;
+                }
+                else
+                {
+                    stateMachine.state = QSPlatformerStateMachine.State.Iddle;
+                }
+            }
+
+            else
+            {
+                if(RigidBodyComponent.linearVelocityY <= 0)
+                {
+                    stateMachine.state = QSPlatformerStateMachine.State.Fall;
+                }
+            }
         }
+
+
         private void UpdateAnimation()
         {
-
+            AnimationController.SetFlip(SpriteRendererComponent, RigidBodyComponent.linearVelocityX);
+            AnimationController.UpdateAnimation(AnimatorComponent, stateMachine);
         }
-
-
 
 
 
         /* FixedUpdate */
         private void CheckGrounded()
         {
-            GroundedChecker.CheckGrounded(BoxCollider);
+            GroundedChecker.CheckGrounded(BoxColliderComponent);
         }
 
         private void ApplyStickMovement()
         {
-            MovementHandler.ApplyHorizontalMovement(RigidBody);
-            MovementHandler.ApplyVerticalMovement(RigidBody);
+            MovementHandler.ApplyHorizontalMovement(RigidBodyComponent);
+            MovementHandler.ApplyVerticalMovement(RigidBodyComponent);
         }
 
         private void TryJump()
@@ -128,14 +154,17 @@ namespace QuickStart.Platformer
                 GroundedChecker.TimeSinceAirborn())
                 )
             {
-                JumpHandler.PerformJump(RigidBody);
+                JumpHandler.PerformJump(RigidBodyComponent);
+
+
+                stateMachine.state = QSPlatformerStateMachine.State.Jump;
             }
         }
 
 
         private void AdjustJumpHeight()
         {
-            JumpHandler.AdjustJumpHeight(RigidBody);
+            JumpHandler.AdjustJumpHeight(RigidBodyComponent);
         }
 
 

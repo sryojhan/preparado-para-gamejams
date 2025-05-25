@@ -26,11 +26,20 @@ namespace QuickStart.Platformer
             set
             {
                 previousState = currentState;
+                currentState = value;
             }
 
         }
 
+        public bool StateHasChanged()
+        {
+            return currentState != previousState;
+        }
 
+        public void ConsumeState()
+        {
+            previousState = currentState;
+        }
 
     }
 

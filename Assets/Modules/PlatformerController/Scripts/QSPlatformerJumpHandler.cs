@@ -174,6 +174,8 @@ namespace QuickStart.Platformer
 
             lastJumpTime = Time.time;
             jumpButtonBuffered = false;
+
+            //TODO: custom force to double jump
         }
 
 

@@ -37,6 +37,11 @@ namespace QuickStart.Platformer
             FetchComponentReferences();
         }
 
+        private void Start()
+        {
+            InitialiseCameraController();
+        }
+
         private void Update()
         {
             UpdatePlayerInput();
@@ -47,16 +52,21 @@ namespace QuickStart.Platformer
             UpdateAnimation();
         }
 
+
         private void FixedUpdate()
         {
             CheckGrounded();
 
-            ApplyStickMovement();
+            ManageMovement();
 
             TryJump();
             AdjustJumpHeight();
         }
 
+        private void LateUpdate()
+        {
+            CameraController.UpdateCameraPosition(transform.position, InputManager.GetLeftStick(),RigidBodyComponent.linearVelocity, GroundedChecker.IsGrounded);
+        }
 
         /* Awake */
         private void InitialiseStateMachine()
@@ -82,6 +92,12 @@ namespace QuickStart.Platformer
         }
 
 
+        /* Start */
+
+        private void InitialiseCameraController()
+        {
+            CameraController.InitialiseCameraController();
+        }
 
 
         /* Update */
@@ -141,7 +157,7 @@ namespace QuickStart.Platformer
             GroundedChecker.CheckGrounded(BoxColliderComponent);
         }
 
-        private void ApplyStickMovement()
+        private void ManageMovement()
         {
             MovementHandler.ApplyHorizontalMovement(RigidBodyComponent);
             MovementHandler.ApplyVerticalMovement(RigidBodyComponent);

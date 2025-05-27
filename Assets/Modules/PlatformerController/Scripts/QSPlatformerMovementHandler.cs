@@ -110,5 +110,13 @@ namespace QuickStart.Platformer
 
             rigidBody.AddForce(Vector2.down * downwardsSpeed, ForceMode2D.Force);
         }
+
+
+
+        //TODO: transfer vertical momentum
+        public void TransferVerticalMomentum(Rigidbody2D rigidBody)
+        {
+
+        }
     }
 }

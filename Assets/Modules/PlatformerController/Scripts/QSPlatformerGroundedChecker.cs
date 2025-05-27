@@ -13,9 +13,9 @@ namespace QuickStart.Platformer
 
         [Header("Callbacks")]
         [Tooltip("Called when the characer goes from airborn to a grounded status")]
-        public UnityAction OnGrounded;
+        public UnityEvent OnGrounded;
         [Tooltip("Called when the characer goes from grounded to an airborn status")]
-        public UnityAction OnAirborn;
+        public UnityEvent OnAirborn;
 
         /* status properties with public getters  */
         public bool IsGrounded { get; private set; }

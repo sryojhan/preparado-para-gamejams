@@ -1,9 +1,9 @@
 using EasyButtons;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace SceneTransition
 {
@@ -12,19 +12,20 @@ namespace SceneTransition
     {
         protected override bool DestroyOnLoad => false;
 
-        public Material material;
+        public int forceTransition = -1;
 
-        public Transition transition;
+        public Material material;
+        public Transition[] transitions;
+        public RawImage image;
 
 
         private bool inTransition;
 
 
+        public delegate void OnTransitionEnd();
 
-        //Illustration sequence patch
-        public bool useCustomFunction = false;
-        public delegate void CustomFunction();
-        public CustomFunction customFunction = () => { };
+        public OnTransitionEnd onTransitionEndOnce;
+        public OnTransitionEnd onTransitionEndAlways;
 
         private void Start()
         {
@@ -51,12 +52,7 @@ namespace SceneTransition
             return inTransition;
         }
 
-        //TODO: mejorar la forma de indexar las escenas
-        //public void ChangeScene(SceneIndex sceneIndex)
-        //{
-        //    ChangeScene((int)sceneIndex);
-        //}
-
+        
         public void ChangeScene(string sceneName)
         {
             if (inTransition)
@@ -80,15 +76,22 @@ namespace SceneTransition
 
         private IEnumerator SceneSwap(string sceneName)
         {
+            var sceneLoadingData = SceneManager.LoadSceneAsync(sceneName);
+            sceneLoadingData.allowSceneActivation = false;
+
+            Transition transition = forceTransition >= 0 ? transitions[forceTransition] : transitions[Random.Range(0, transitions.Length)];
+
             inTransition = true;
 
-            material.SetTexture("_background", transition.background);
+            image.texture = transition.background;
             material.SetColor("_backgroundColor", transition.backgroundColor);
             material.SetTexture("_transitionGradient", transition.In.gradientMask);
 
             //Fade in
             material.SetFloat("_time", 0);
-            material.SetFloat("_invert", transition.In.invert ? 1 : 0);
+
+            //TODO: temp change
+            material.SetFloat("_invert", Random.value > 0.5f ? 1 : 0);
 
 
             if (transition.In.enabled)
@@ -100,26 +103,30 @@ namespace SceneTransition
                 }
 
             material.SetFloat("_time", 1);
-            material.SetFloat("_inverted", transition.Out.invert ? 1 : 0);
+
+            //TODO: temp change
+            material.SetFloat("_inverted", Random.value > 0.5f ? 1 : 0);
 
             material.SetTexture("_transitionGradient", transition.Out.gradientMask);
             //Load Scene
-            if(!useCustomFunction)
-            {
-                SceneManager.LoadScene(sceneName);
-            }
-            else {
-
-                customFunction();
-            }
+            //SceneManager.LoadScene(sceneName);
 
 
             if (transition.middleScreenDuration > 0)
                 yield return new WaitForSeconds(transition.middleScreenDuration);
 
+            while (sceneLoadingData.progress < 0.9f) yield return null;
+
+            sceneLoadingData.allowSceneActivation = true;
+
+
             //Wait screen
 
             //Fade out
+
+            material.SetFloat("_invert", transition.Out.invert ? 1 : 0);
+
+
             if (transition.Out.enabled)
                 for (float i = transition.Out.duration; i > 0; i -= Time.deltaTime)
                 {
@@ -130,6 +137,11 @@ namespace SceneTransition
             material.SetFloat("_time", 0);
 
 
+            onTransitionEndAlways?.Invoke();
+            onTransitionEndOnce?.Invoke();
+
+            onTransitionEndOnce = () => { };
+
             inTransition = false;
         }
 
@@ -137,18 +149,6 @@ namespace SceneTransition
         public bool IsTransitionComplete()
         {
             return !inTransition;
-        }
-
-        [Button]
-        public void ChangeSceneToSandbox()
-        {
-            ChangeScene("Sandbox");
-        }
-
-        [Button]
-        public void ChangeSceneToSample()
-        {
-            ChangeScene("SampleScene");
         }
 
     }

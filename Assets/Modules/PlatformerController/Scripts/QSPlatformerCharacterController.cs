@@ -65,7 +65,7 @@ namespace QuickStart.Platformer
 
         private void LateUpdate()
         {
-            CameraController.UpdateCameraPosition(transform.position, InputManager.GetLeftStick(),RigidBodyComponent.linearVelocity, GroundedChecker.IsGrounded);
+            UpdateCameraPosition();
         }
 
         /* Awake */
@@ -184,8 +184,11 @@ namespace QuickStart.Platformer
         }
 
 
-
-
+        /* Late Update */
+        private void UpdateCameraPosition()
+        {
+            CameraController.UpdateCameraPosition(transform.position, InputManager.GetLeftStick(), RigidBodyComponent.linearVelocity, GroundedChecker.IsGrounded);
+        }
 
     }
 }

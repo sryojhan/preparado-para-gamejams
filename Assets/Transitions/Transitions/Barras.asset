@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a4f20b810e167649bd4f38cd81beb42, type: 3}
-  m_Name: DefaultTransition
+  m_Name: Barras
   m_EditorClassIdentifier: 
   In:
     enabled: 1
-    gradientMask: {fileID: 2800000, guid: df8e376ec9153df4aa820d1606693ce0, type: 3}
+    gradientMask: {fileID: 2800000, guid: ac4bc60fd5af4974dafde445f93d519f, type: 3}
     duration: 0.2
     invert: 0
     interpolation:
@@ -25,7 +25,7 @@ MonoBehaviour:
   middleScreenDuration: 0
   Out:
     enabled: 1
-    gradientMask: {fileID: 2800000, guid: df8e376ec9153df4aa820d1606693ce0, type: 3}
+    gradientMask: {fileID: 2800000, guid: ac4bc60fd5af4974dafde445f93d519f, type: 3}
     duration: 0.2
     invert: 0
     interpolation:

@@ -24,12 +24,12 @@ public class Interpolation
 
     public static float LerpWithInterpolation(float x, float a, float b, Type type = Type.Cubic, Mode mode = Mode.Out)
     {
-        return Mathf.Lerp(a, b, Interpolate(x, type, mode));
+        return Mathf.LerpUnclamped(a, b, Interpolate(x, type, mode));
     }
 
     public float LerpWithInterpolation(float x, float a, float b)
     {
-        return Mathf.Lerp(a, b, Interpolate(x));
+        return Mathf.LerpUnclamped(a, b, Interpolate(x));
     }
 
     public Vector2 LerpWithInterpolation(float t, Vector2 a, Vector2 b)

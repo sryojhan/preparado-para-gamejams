@@ -80,7 +80,7 @@ Material:
     - _invert: 0
     - _inverted: 1
     - _isVertical: 0
-    - _progress: 0.3
+    - _progress: 0.237
     - _time: 0.349
     m_Colors:
     - _BackgroundColor: {r: 1, g: 1, b: 1, a: 0}

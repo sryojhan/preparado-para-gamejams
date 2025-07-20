@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d93134c0a00dc4486f52f45210aa38, type: 3}
+  m_Name: ExampleDialogue
+  m_EditorClassIdentifier: 
+  pages:
+  - speaker: Yojhan
+    speakerSprite: {fileID: 0}
+    message: "Hola que tal nena, como tu estas? espero que bien no se que mas decirte
+      esta es la prueba para ver que todo lo relacionado con el di\xE1logo parece
+      funcionar correctamente no se que mas decirte nena jejeje pasa un bonito dia
+      y una buena vida"
+  options: []
+  cancelOptionIdx: -1

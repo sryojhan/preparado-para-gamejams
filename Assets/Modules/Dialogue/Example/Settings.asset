@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d222e4e7b6a1e4cb83257ff8988426, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  font: {fileID: 0}
+  fontSize: 32
+  textRevealInterpolation:
+    type: 3
+    mode: 0
+  baseRevealTimePerChar: 0.01
+  comaExtraPauseMultiplier: 6
+  dotExtraPauseMultiplier: 12
+  timeToWaitBeforeSkip: 0.1
+  letterRevealSound: {fileID: 8300000, guid: c4ad56c5716a86742b07acc2cbcb14f7, type: 3}
+  playSoundOnEachCharacter: 0
+  commands: []

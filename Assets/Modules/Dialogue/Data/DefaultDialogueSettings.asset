@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d222e4e7b6a1e4cb83257ff8988426, type: 3}
+  m_Name: DefaultDialogueSettings
+  m_EditorClassIdentifier: 
+  font: {fileID: 11400000, guid: ec87bca2bd0a0b64a9d9a36a2d0e4813, type: 2}
+  fontSize: 32
+  timeToRevealLetter: 0.1
+  timeToRevealComa: 0.2
+  timeToRevealDot: 0.3
+  waitToSkip: 0.1
+  letterSound: {fileID: 0}
+  playSoundEachCharacter: 0
+  commands:
+  - command: wobble
+    associatedEffect: {fileID: 11400000, guid: d44198daf212ee6448710549a96b56ad, type: 2}

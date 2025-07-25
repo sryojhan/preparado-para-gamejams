@@ -16,12 +16,12 @@ namespace DialogueSystem
 
         [Header("Timing")]
         public float baseRevealTimePerChar = 0.1f;
-        public float comaExtraPauseMultiplier = 6;
-        public float dotExtraPauseMultiplier = 12;
+        public float comaWaitTime = 6;
+        public float dotWaitTime = 12;
         public float timeToWaitBeforeSkip = 0.1f;
 
         [Header("Sound")]
-        public AudioClip letterRevealSound;
+        public AudioClip[] letterRevealSound;
         public bool playSoundOnEachCharacter = false;
 
         [Header("Effects")]

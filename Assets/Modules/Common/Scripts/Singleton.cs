@@ -49,19 +49,23 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     public static bool ImTheOne(T me)
     {
-        return instance == me;
+        return _instance == me;
     }
 
     public static bool DestroyIfInitialised(T me)
     {
-        if(instance != me)
+        if(_instance != null && _instance != me)
         {
             Destroy(me.gameObject);
 
             return true;
         }
         return false;
+    }
 
+    private void OnDestroy()
+    {
+        if (ImTheOne(this as T)) _instance = null;
     }
 
 }

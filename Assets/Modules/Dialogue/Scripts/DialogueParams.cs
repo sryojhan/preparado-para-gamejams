@@ -8,8 +8,8 @@ namespace DialogueSystem
     public struct DialogueParams
     {
         public DialogueContent content;
-        public DialogueEventDispatcher eventDispatcher;
         public DialogueSettings settings;
+        public DialogueEventDispatcher eventDispatcher;
     }
 
 }

@@ -56,6 +56,21 @@ namespace DialogueSystem
         }
 
 
+
+        class Sentence
+        {
+            public int beginning;
+            public int end;
+
+            public enum Separator
+            {
+                Dot, Coma, QuestionMark, ExclamationMark, End, None
+            }
+
+            public Separator separator;
+        }
+
+
         IEnumerator PlayDialogue(DialogueParams dialogueParams)
         {
             currentlyUsedParams = dialogueParams;
@@ -64,7 +79,7 @@ namespace DialogueSystem
             DialogueSettings settings = dialogueParams.settings;
             DialogueEventDispatcher events = dialogueParams.eventDispatcher;
 
-            if(content.pages.Length <= 0)
+            if (content.pages.Length <= 0)
             {
                 Debug.LogError("Dialogue System: Trying to start empty dialogue");
                 yield break;
@@ -73,57 +88,60 @@ namespace DialogueSystem
 
             int currentPageIdx = 0;
 
-            while(currentPageIdx < content.pages.Length)
+            while (currentPageIdx < content.pages.Length)
             {
                 DialogueContent.DialoguePage page = content.pages[currentPageIdx];
 
                 string rawText = page.message;
 
+
+
+
                 text.text = rawText;
                 text.maxVisibleCharacters = 0;
 
-                int textLength = rawText.Length;
-
                 int previousCharacterCount = 0;
 
+                Sentence[] sentences = GenerateSentences(rawText);
 
-                List<float> ponderedTimeline = CreatePonderedTimeLine(rawText, settings);
 
-                float maxPonderedTime = ponderedTimeline[^1];
-
-                float revealDuration = maxPonderedTime * settings.baseRevealTimePerChar;
-                float revealSpeed = 1.0f / revealDuration;
-
-                for(float rawProgress = 0; rawProgress < 1; rawProgress += Time.deltaTime * revealSpeed)
+                foreach (Sentence sentence in sentences)
                 {
-                    float interpolated = settings.textRevealInterpolation.Interpolate(rawProgress);
+                    int sentenceLength = sentence.end - sentence.beginning;
 
-                    int ponderedPosition = ponderedTimeline.BinarySearch(interpolated * maxPonderedTime);
+                    float revealDuration = sentenceLength * settings.baseRevealTimePerChar;
+                    float revealSpeed = 1.0f / revealDuration;
 
-                    if (ponderedPosition < 0) ponderedPosition = ~ponderedPosition;
-
-                    int characterCount = ponderedPosition;
-
-                    if(characterCount > previousCharacterCount)
+                    for (float rawProgress = 0; rawProgress < 1; rawProgress += Time.deltaTime * revealSpeed)
                     {
-                        for(int newCharacterIdx = previousCharacterCount; newCharacterIdx < characterCount; newCharacterIdx++)
+                        float interpolated = settings.textRevealInterpolation.Interpolate(rawProgress);
+
+                        int characterCount = Mathf.FloorToInt(Mathf.Lerp(sentence.beginning, sentence.end, interpolated));
+
+                        if (characterCount > previousCharacterCount)
                         {
-                            events.ProcessEvent(DialogueEvent.OnCharacterRevealed, rawText[newCharacterIdx].ToString());
+                            for (int newCharacterIdx = previousCharacterCount; newCharacterIdx < characterCount; newCharacterIdx++)
+                            {
+                                events.ProcessEvent(DialogueEvent.OnCharacterRevealed, rawText[newCharacterIdx].ToString());
+                            }
                         }
+
+                        previousCharacterCount = characterCount;
+
+                        text.maxVisibleCharacters = characterCount;
+
+                        yield return null;
                     }
 
-                    previousCharacterCount = characterCount;
+                    text.maxVisibleCharacters = sentence.end;
 
-                    text.maxVisibleCharacters = characterCount;
 
-                    yield return null;
+                    if (sentence.separator != Sentence.Separator.End)
+                        yield return new WaitForSeconds(sentence.separator == Sentence.Separator.Coma ? settings.comaWaitTime : settings.dotWaitTime);
                 }
-
-                text.maxVisibleCharacters = textLength;
 
 
                 currentPageIdx += 1;
-
 
                 yield return null;
 
@@ -131,41 +149,71 @@ namespace DialogueSystem
 
 
 
-
-
+            print("END");
 
             currentlyUsedParams = null;
-            
         }
 
 
-
-        List<float> CreatePonderedTimeLine(string text, DialogueSettings settings)
+        private Sentence[] GenerateSentences(string text)
         {
-            List<float> timeline = new();
+            List<Sentence> sentences = new();
 
+            int beginning = 0;
+            int current = 0;
 
-            float totalTime = 0;
-
-            foreach (char character in text)
+            foreach (char c in text)
             {
-                timeline.Add(totalTime);
+                Sentence.Separator separator = Sentence.Separator.None;
 
-                float weight = 1;
+                if (c == '.')
+                {
+                    separator = Sentence.Separator.Dot;
+                }
+                else if (c == ',')
+                {
+                    separator = Sentence.Separator.Coma;
+                }
+                else if (c == '?')
+                {
+                    separator = Sentence.Separator.QuestionMark;
+                }
+                else if (c == '!')
+                {
+                    separator = Sentence.Separator.ExclamationMark;
+                }
 
-                if (character == ',') weight = settings.comaExtraPauseMultiplier;
-                else if (character == '.') weight = settings.dotExtraPauseMultiplier;
 
-                totalTime += weight;
+                if (separator != Sentence.Separator.None)
+                {
+                    Sentence newSentence = new()
+                    {
+                        beginning = beginning,
+                        end = current + 1,
+                        separator = separator
+                    };
+                    sentences.Add(newSentence);
+
+                    beginning = current + 1;
+                }
+
+                current++;
             }
 
-            return timeline;
-        }
+
+            if (beginning < text.Length) //the text doesnt end with punctuation
+            {
+                Sentence lastSentence = new ()
+                {
+                    beginning = beginning,
+                    end = current,
+                    separator = Sentence.Separator.End
+                };
+                sentences.Add(lastSentence);
+            }
 
 
-        IEnumerator PlayTextEffects()
-        {
-            yield return null;
+            return sentences.ToArray();
         }
 
 

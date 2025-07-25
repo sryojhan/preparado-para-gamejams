@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55d222e4e7b6a1e4cb83257ff8988426, type: 3}
-  m_Name: Settings
+  m_Name: Settings 1
   m_EditorClassIdentifier: 
   font: {fileID: 11400000, guid: ec87bca2bd0a0b64a9d9a36a2d0e4813, type: 2}
   fontSize: 32
   textRevealInterpolation:
-    type: 1
+    type: 0
     mode: 0
-  baseRevealTimePerChar: 0.04
+  baseRevealTimePerChar: 0.007
   comaWaitTime: 0.2
-  dotWaitTime: 0.8
+  dotWaitTime: 0.2
   timeToWaitBeforeSkip: 0.1
   letterRevealSound:
-  - {fileID: 8300000, guid: c4ad56c5716a86742b07acc2cbcb14f7, type: 3}
+  - {fileID: 8300000, guid: 4e17031b417d450459dc063fc7cfc0a8, type: 3}
   playSoundOnEachCharacter: 1
   commands: []

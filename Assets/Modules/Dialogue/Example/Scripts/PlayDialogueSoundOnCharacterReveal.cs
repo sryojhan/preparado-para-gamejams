@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace DialogueSystem.Examples
 {
-    public class PlayDialogueSound : MonoBehaviour
+    public class PlayDialogueSoundOnCharacterReveal : MonoBehaviour
     {
+        public float maxPitchVariation = 0.2f;
+
         private AudioSource audioSource;
         private void Start()
         {
@@ -19,7 +21,14 @@ namespace DialogueSystem.Examples
         {
             if (args[0] == ' ') return;
 
-            audioSource.PlayOneShot(DialogueManager.instance.GetCurrentDialogueSettings().letterRevealSound);
+            var settings = DialogueManager.instance.GetCurrentDialogueSettings();
+
+            if (settings.letterRevealSound.Length == 0) return;
+
+            AudioClip clip = settings.letterRevealSound[Random.Range(0, settings.letterRevealSound.Length)];
+
+            audioSource.pitch = 1 + Random.insideUnitCircle.x * maxPitchVariation;
+            audioSource.PlayOneShot(clip);
         }
     }
 }
